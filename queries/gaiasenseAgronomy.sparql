@@ -1,0 +1,38 @@
+#PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX osm: <http://www.metaphacts.com/ontologies/osm#>
+PREFIX gs-api: <https://w3id.org/demeter/agri/ext/gaiasense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX fiware: <https://uri.fiware.org/ns/data-models#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geo84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+SELECT * WHERE {
+   BIND("en"^^xsd:string as ?inputlanguage)
+   BIND("205"^^xsd:string as ?inputlocationid)
+   BIND("100"^^xsd:integer as ?inputradius)
+   BIND("1"^^xsd:integer as ?inputlimit)
+  SERVICE <http://www.metaphacts.com/ontologies/platform/repository/federation#gaiasenseAgronomy> {
+## inputs
+    ?results gs-api:locationIdInput ?inputlocationid .
+    ?results gs-api:radiusInput ?inputradius .
+    ?results gs-api:limit  ?inputlimit .
+    ?results gs-api:language ?inputlanguage .
+## outputs    
+    ?results gs-api:parcelId ?parcelId .
+    #?results gs-api:locationId ?locationid .
+    ?results gs-api:parcelToponym ?parcelToponym .
+    ?results dc:identifier ?parcelIdentifier .
+    ?results fiware:name ?parcelPrefecture .
+    ?results geo:asWKT ?polygon .
+    ?results geo84:long ?longitude .
+    ?results geo84:lat ?latitude .
+    ?results foaf:name ?adminLastname .
+    ?results gs-api:phValue ?phValue .
+    ?results gs-api:salinityValue ?salinityValue .
+    ?results fiware:category ?rocrDescription .
+        
+  }
+ } LIMIT 100

@@ -1,0 +1,39 @@
+#PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dc: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX osm: <http://www.metaphacts.com/ontologies/osm#>
+PREFIX gs-api: <https://w3id.org/demeter/agri/ext/gaiasense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX fiware: <https://uri.fiware.org/ns/data-models#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geo84: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX foodie: <http://foodie-cloud.com/model/foodie#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+SELECT * WHERE {
+   BIND("irrigations"^^xsd:string as ?inputevent)
+   BIND("205"^^xsd:string as ?inputlocationid)
+   BIND("2021-01-01"^^xsd:date as ?inputfromdate)
+   BIND("2022-08-26"^^xsd:date as ?inputtodate)
+  SERVICE <http://www.metaphacts.com/ontologies/platform/repository/federation#gaiasenseEvents> {
+## inputs
+    ?results gs-api:locationIdInput ?inputlocationid .
+    ?results gs-api:eventType ?inputevent .
+    ?results fiware:validFrom ?inputfromdate .
+    ?results fiware:validTo ?inputtodate .
+   
+## outputs    
+    ?results gs-api:parcelId ?parcelId .
+    ?results sosa:resultTime ?date .
+    ?results prov:generatedAtTime ?startDateTime .
+    ?results prov:invalidatedAtTime ?endDateTime .
+    ?results foodie:code ?osdeCode .
+    ?results gs-api:waterQuantity ?waterQuantity .
+    ?results gs-api:irrigationSystem ?irrigationSystem .
+    ?results fiware:description ?remarks .
+    ?results gs-api:unit ?unit .
+    ?results gs-api:irigHour ?irigHour .
+        
+  }
+ } LIMIT 100
