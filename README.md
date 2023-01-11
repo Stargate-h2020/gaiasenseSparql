@@ -4,7 +4,7 @@ Gaiasense API has been exposed as Linked Data, adding a layer on top of the REST
 
 The translation is done by the Ephedra component of Metaphactory application. Metaphactory exposes a SPARQL endpoint which can be used to access the linked data as any other semantic data source in a triplestore. Hence, this SPARQL endpoint can be used, for example, from different applications/systems or from the command line.
 
-To play with this Linked Data use the Metaphactory [Sparql GUI](http://metaphactory.foodie-cloud.org/sparql). Note: You need to select repository "ephedra"
+To play with this Linked Data use the Metaphactory [Sparql GUI](http://metaphactory.foodie-cloud.org/sparql). **Note: You need to select repository "ephedra"**
 
 Some example queries to access the three main endpoints are provide in this repository.
 
