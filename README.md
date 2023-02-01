@@ -39,3 +39,16 @@ SELECT * WHERE { \
 ```
 curl -i -X POST  -H "Accept:application/sparql-results+json" -H "Content-Type:application/sparql-query"  --data-binary "@/path/to/file.sparql" 'http://metaphactory.foodie-cloud.org/sparql?repository=ephedra'
 ```
+
+# Wrapper utilized for running SparqlQueries in python
+[SparqlWrapper](https://sparqlwrapper.readthedocs.io/en/latest/)
+
+## Install wrapper using PIP package manager
+```
+pip install SPARQLWrapper
+```
+
+## Command to run python script using argument
+```
+python .\gaiasenseSparql.py arg arg belongs to one of the [agronomy, harvest, irrigations, sprays, sensor_measurements, phaenological_stages]
+```
